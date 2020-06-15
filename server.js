@@ -40,6 +40,11 @@ app.get('/hello', (request, response) => {
   response.status(200).render('./pages/index.ejs');
 })
 
+app.get('/searches', (request, response) => {
+  console.log('This is the search route');
+  response.status(200).render('./pages/searches/new.ejs');
+})
+
 // Catch all for any errors
 app.all('*', (request, response) => {
   response.status(404).send('No escape from reality');
