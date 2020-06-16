@@ -36,8 +36,13 @@ app.get('/', (request, response) => {
   client.query(sql)
     .then(sqlResults => {
       console.log(sqlResults.rows);
+      let displayBooks = [];
+      sqlResults.rows.forEach(value => {
+        displayBooks.push(value);
+      })
+      console.log(displayBooks);
+      response.status(200).render('./pages/index.ejs', { link: './searches', bookshelfResults: displayBooks });
     })
-  // response.status(200).render('./pages/index.ejs', { link: './searches'});
 });
 
 // app.get('/hello', (request, response) => {

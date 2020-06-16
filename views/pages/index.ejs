@@ -14,8 +14,8 @@
   <main>
     <p><a href="<%= link %>">searches</a></p>
 
-  <% searchResults.forEach( book => { %>
-    <img src="<%= book.finalImage%>" alt="<%= book.title %>">
+  <% bookshelfResults.forEach( book => { %>
+    <img src="<%= book.image_url %>" alt="<%= book.title %>">
     <h2><%= book.title %></h2>
     <h3><%= book.author %></h3>
     <p><%= book.description %></p>
