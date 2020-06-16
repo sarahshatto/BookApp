@@ -45,10 +45,56 @@ app.get('/searches', (request, response) => {
   response.status(200).render('./pages/searches/new.ejs');
 })
 
+app.post('/searches', (request, response) => {
+  let searchQuery = request.body.search[0];
+  let titleOrAuthor = request.body.search[1];
+
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+
+  if(titleOrAuthor === 'title'){
+    url+=`+intitle:${searchQuery}`;
+  }else if(titleOrAuthor === 'author'){
+    url+=`+inauthor:${searchQuery}`;
+  }
+
+  superagent.get(url)
+    .then(results => {
+      console.log(results.body.items);
+      let bookArray = results.body.items;
+      const finalBookArray = bookArray.map(book => {
+        return new Book(book.volumeInfo)
+      });
+      console.log(finalBookArray)
+      response.render('./pages/searches/show.ejs', {searchResults: finalBookArray})
+    }).catch();
+})
+
 // Catch all for any errors
 app.all('*', (request, response) => {
   response.status(404).send('No escape from reality');
 });
+
+function Book(info) {
+  this.title = info.title ? info.title : 'no title available';
+  this.author = info.authors ? info.authors : 'no author available'; // returns an array
+  this.description = info.description ? info.description : 'no description available';
+  // this.image = imageGetter(info.imageLinks); // ------WIP------
+  this.image = info.imageLinks && info.imageLinks.smallThumbnail ? info.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+  //------WIP------
+  function imageGetter(image) {
+    const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
+    if (image !== null){ 
+      if (image[4] === 's') {
+        return image;
+      }else{
+        return 'https' + image.slice(4);
+      }
+    }else{
+      return placeholderImage;
+    }
+  }
+}
+
 
 // Turning on the server
 app.listen(PORT, () => {
