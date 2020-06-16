@@ -7,13 +7,13 @@ Lab 11
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code 301 class. (i.e. What's your problem domain?) -->
+Provide a site for users to collect their favorite book titles and store it for easy reference.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+Once you clone the repo down just run `npm -i` to bring in all the dependencies. You will need to provide your own .env file and declare a PORT in it.
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+This site is using Node.js, Express, pg, superagent, and EJS.
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
@@ -54,11 +54,11 @@ Number and name of feature: Feature #3
 
 Estimate of time needed to complete: 30 min. 
 
-Start time: _____
+Start time: 4:30
 
-Finish time: _____
+Finish time: 5:30
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 hour
 
 ---
 
@@ -66,11 +66,11 @@ Number and name of feature: Feature #4
 
 Estimate of time needed to complete: 30 min. 
 
-Start time: _____
+Start time: 5:45
 
-Finish time: _____
+Finish time: 7:00
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.2 hour
 
 ---
 
@@ -78,11 +78,11 @@ Number and name of feature: Feature #5
 
 Estimate of time needed to complete: 30 min. 
 
-Start time: _____
+Start time: 7:00
 
-Finish time: _____
+Finish time: 8:00
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 hour
 
 ---
 
@@ -90,8 +90,8 @@ Number and name of feature: Feature #6
 
 Estimate of time needed to complete: 30 min. 
 
-Start time: _____
+Start time: 8:30
 
-Finish time: _____
+Finish time: 8:45
 
-Actual time needed to complete: _____
+Actual time needed to complete: 15 minutes
