@@ -32,13 +32,13 @@ app.set('view engine', 'ejs');
 // Testing the home route, Proof of life
 app.get('/', (request, response) => {
   console.log('Is this the real life?');
-  response.status(200).send('Is this just fantasy?');
+  response.status(200).render('./pages/index.ejs', { link: './searches' });
 });
 
-app.get('/hello', (request, response) => {
-  console.log('I am on Hello!');
-  response.status(200).render('./pages/index.ejs');
-})
+// app.get('/hello', (request, response) => {
+//   console.log('I am on Hello!');
+//   response.status(200).render('./pages/index.ejs');
+// })
 
 app.get('/searches', (request, response) => {
   console.log('This is the search route');
@@ -71,28 +71,16 @@ app.post('/searches', (request, response) => {
 
 // Catch all for any errors
 app.all('*', (request, response) => {
-  response.status(404).send('No escape from reality');
+  console.error('No escape from reality!');
+  response.status(404).render('./pages/error.ejs');
 });
 
 function Book(info) {
   this.title = info.title ? info.title : 'no title available';
   this.author = info.authors ? info.authors : 'no author available'; // returns an array
   this.description = info.description ? info.description : 'no description available';
-  // this.image = imageGetter(info.imageLinks); // ------WIP------
   this.image = info.imageLinks && info.imageLinks.smallThumbnail ? info.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
-  //------WIP------
-  function imageGetter(image) {
-    const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-    if (image !== null){ 
-      if (image[4] === 's') {
-        return image;
-      }else{
-        return 'https' + image.slice(4);
-      }
-    }else{
-      return placeholderImage;
-    }
-  }
+  this.finalImage = this.image[4] !== 's'? 'https' + this.image.slice(4):info.imageLinks.smallThumbnail;
 }
 
 

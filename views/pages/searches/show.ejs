@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="/styles/reset.css" rel="stylesheet" type="text/css">
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/icons.css" rel="stylesheet" type="text/css">
+    <link href="/styles/layout.css" rel="stylesheet" type="text/css">
+    <link href="/styles/modules.css" rel="stylesheet" type="text/css">
     <title>Book Collection</title>
   </head>
   <body>
     <main>
         <% searchResults.forEach( book => { %>
             <h3><%= book.title %></h3>
+            <h3><%= book.author %></h3>
+            <img src="<%= book.finalImage%>" alt="<%= book.title %>">
         <% }) %>
     </main>
   </body>
