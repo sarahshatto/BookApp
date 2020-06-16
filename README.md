@@ -30,11 +30,11 @@ Number and name of feature: Feature #1
 
 Estimate of time needed to complete: 30 min. 
 
-Start time: _____
+Start time: 2:30
 
-Finish time: _____
+Finish time: 3:30
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 Hour
 
 ---
 
@@ -42,11 +42,11 @@ Number and name of feature: Feature #2
 
 Estimate of time needed to complete: 30 min. 
 
-Start time: _____
+Start time: 3:30
 
-Finish time: _____
+Finish time: 4:30
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 Hour
 
 ---
 
