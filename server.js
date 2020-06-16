@@ -32,13 +32,13 @@ app.set('view engine', 'ejs');
 // Testing the home route, Proof of life
 app.get('/', (request, response) => {
   console.log('Is this the real life?');
-  response.status(200).send('Is this just fantasy?');
+  response.status(200).render('./pages/index.ejs', { link: './searches' });
 });
 
-app.get('/hello', (request, response) => {
-  console.log('I am on Hello!');
-  response.status(200).render('./pages/index.ejs');
-})
+// app.get('/hello', (request, response) => {
+//   console.log('I am on Hello!');
+//   response.status(200).render('./pages/index.ejs');
+// })
 
 app.get('/searches', (request, response) => {
   console.log('This is the search route');
