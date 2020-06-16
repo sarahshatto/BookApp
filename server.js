@@ -71,31 +71,16 @@ app.post('/searches', (request, response) => {
 
 // Catch all for any errors
 app.all('*', (request, response) => {
-  response.status(404).send('No escape from reality');
+  console.error('No escape from reality!');
+  response.status(404).render('./pages/error.ejs');
 });
 
 function Book(info) {
   this.title = info.title ? info.title : 'no title available';
   this.author = info.authors ? info.authors : 'no author available'; // returns an array
   this.description = info.description ? info.description : 'no description available';
-  // this.image = imageGetter(info.imageLinks.smallThumbnail); // ------WIP------
   this.image = info.imageLinks && info.imageLinks.smallThumbnail ? info.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.finalImage = this.image[4] !== 's'? 'https' + this.image.slice(4):info.imageLinks.smallThumbnail;
-
-
-  //------WIP------
-  // function imageGetter(image) {
-  //   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  //   if (image){ 
-  //     if (image[4] === 's') {
-  //       return image;
-  //     }else{
-  //       return 'https' + image.slice(4);
-  //     }
-  //   }else{
-  //     return placeholderImage;
-  //   }
-  // }
 }
 
 
