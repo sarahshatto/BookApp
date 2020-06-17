@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="/styles/reset.css" rel="stylesheet" type="text/css">
-    <link href="/styles/base.css" rel="stylesheet" type="text/css">
-    <link href="/styles/icons.css" rel="stylesheet" type="text/css">
-    <link href="/styles/layout.css" rel="stylesheet" type="text/css">
-    <link href="/styles/modules.css" rel="stylesheet" type="text/css">
-    <title>Book Collection</title>
+    <%- include('../layouts/head.ejs') %>
   </head>
   <body>
+    <header>
+
+    </header>
     <main>
       <h4>Search by Title or Author</h4>
       <form action="/searches" method="post">
@@ -28,5 +26,8 @@
         <button type="submit">Search the Google Books API</button>
       </form>
     </main>
+    <footer>
+      
+    </footer>
   </body>
 </html>

@@ -28,15 +28,14 @@ app.use(express.static('public'));
 // set up the view engine for templating
 app.set('view engine', 'ejs');
 
-
-// Testing the home route, Proof of life
-
+// all the routes
 app.get('/', homeRoute);
 app.get('/searches', searchRoute);
 app.post('/searches', postSearch);
 app.get('/books/:id', getDetail);
 app.post('/books', addToFavorites);
 
+// Home route which is the user's favorites file.
 function homeRoute(request, response){
   console.log('Is this the real life?');
   let sql = 'SELECT * FROM books;';
@@ -52,11 +51,14 @@ function homeRoute(request, response){
     }).catch(error => console.error(error));
 }
 
+// The search route to guide the user to make their search
 function searchRoute(request, response){
   console.log('This is the search route');
   response.status(200).render('./pages/searches/new.ejs');
 }
 
+// After the user presses 'Search' a query will be added to URL and sent to good and
+// the response will be passed through a constructor and send to the server to be rendered.
 function postSearch(request, response){
   let searchQuery = request.body.search[0];
   let titleOrAuthor = request.body.search[1];
@@ -79,6 +81,7 @@ function postSearch(request, response){
     }).catch(error => console.error(error));
 }
 
+// Get details of the selected book
 function getDetail(request, response){
   let id = request.params.id;
 
@@ -91,6 +94,7 @@ function getDetail(request, response){
     }).catch(error => console.error(error));
 }
 
+// add a book to the favorites list.
 function addToFavorites(request, response){
   let {author, title, isbn, image_url, description} = request.body;
 
@@ -118,6 +122,7 @@ app.all('*', (request, response) => {
   response.status(404).render('./pages/error.ejs');
 });
 
+// Books constructor
 function Book(info) {
   this.title = info.title ? info.title : 'no title available';
   this.author = info.authors ? info.authors : 'no author available'; // returns an array
