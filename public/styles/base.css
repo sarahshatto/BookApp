@@ -1,6 +1,11 @@
-body{
-  background-color: tan;
+*{
+  background-color: #202C39;
+  color: white;
 }
+
+/* body{
+  
+} */
 
 label {
   display:block;

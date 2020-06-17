@@ -32,7 +32,17 @@ app.set('view engine', 'ejs');
 // Testing the home route, Proof of life
 app.get('/', (request, response) => {
   console.log('Is this the real life?');
-  response.status(200).render('./pages/index.ejs', { link: './searches' });
+  let sql = 'SELECT * FROM books;';
+  client.query(sql)
+    .then(sqlResults => {
+      console.log(sqlResults.rows);
+      let displayBooks = [];
+      sqlResults.rows.forEach(value => {
+        displayBooks.push(value);
+      })
+      console.log(displayBooks);
+      response.status(200).render('./pages/index.ejs', { link: './searches', bookshelfResults: displayBooks });
+    })
 });
 
 // app.get('/hello', (request, response) => {
@@ -59,14 +69,30 @@ app.post('/searches', (request, response) => {
 
   superagent.get(url)
     .then(results => {
-      console.log(results.body.items);
+      // console.log(results.body.items);
       let bookArray = results.body.items;
       const finalBookArray = bookArray.map(book => {
-        return new Book(book.volumeInfo)
+        return new Book(book.volumeInfo);
       });
-      console.log(finalBookArray)
-      response.render('./pages/searches/show.ejs', {searchResults: finalBookArray})
+      console.log(finalBookArray[0]);
+      response.render('./pages/searches/show.ejs', {searchResults: finalBookArray});
     }).catch();
+})
+
+app.get('/books/:id', (request, response) => {
+  console.log(request.params);
+  let id = request.params.id;
+  console.log(id);
+
+  let sql = 'SELECT * FROM books WHERE id = $1;';
+  let safeValues = [id];
+
+  client.query(sql, safeValues)
+    .then(sqlResults => {
+      console.log(sqlResults.rows);
+    })
+
+
 })
 
 // Catch all for any errors
@@ -79,12 +105,17 @@ function Book(info) {
   this.title = info.title ? info.title : 'no title available';
   this.author = info.authors ? info.authors : 'no author available'; // returns an array
   this.description = info.description ? info.description : 'no description available';
+  if(this.description.length > 254) this.description = this.description.slice(0,250)+'...';
   this.image = info.imageLinks && info.imageLinks.smallThumbnail ? info.imageLinks.smallThumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.finalImage = this.image[4] !== 's'? 'https' + this.image.slice(4):info.imageLinks.smallThumbnail;
+  this.isbn ='industryIdentifiers' in info ? info.industryIdentifiers[0].identifier : 'No ISBN available'
 }
 
 
 // Turning on the server
-app.listen(PORT, () => {
-  console.log(`Listening to Queen on ${PORT}`);
-});
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`listening to Queen ${PORT}`);
+    })
+  })
