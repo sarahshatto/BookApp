@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="/styles/reset.css" rel="stylesheet" type="text/css">
-  <link href="/styles/base.css" rel="stylesheet" type="text/css">
-  <link href="/styles/icons.css" rel="stylesheet" type="text/css">
-  <link href="/styles/layout.css" rel="stylesheet" type="text/css">
-  <link href="/styles/modules.css" rel="stylesheet" type="text/css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookApp</title>
+  <%- include('./layouts/head.ejs') %>
 </head>
 <body>
+  <header>
+  </header>
   <main>
     <p><a href="<%= link %>">searches</a></p>
 
   <% bookshelfResults.forEach( book => { %>
-    <form action="/books" method="post">
       <div>
         <img src="<%= book.image_url %>" alt="<%= book.title %>">
         <h2><%= book.title %></h2>
         <h3><%= book.author %></h3>
       </div>
-      <input type="hidden" name="id" value=<%=book.id%> />
-      <input type="hidden" name="title" value=<%=book.title%> />
-      <input type="hidden" name="authors" value=<%=book.authors%> />
-      <input type="hidden" name="description" value=<%=book.description%> />
-      <button type="button">More Details</button>
+      <a href="books/<%= book.id %>">Details</a>
     </form>
   <% }) %>
  </main> 
+ <footer>
+ </footer>
 </body>
 </html>
