@@ -28,6 +28,9 @@ app.use(express.static('public'));
 // set up the view engine for templating
 app.set('view engine', 'ejs');
 
+// const methodOverride = require('method-override');
+// app.use(methodOverride('_method'));
+
 // all the routes
 app.get('/', homeRoute);
 app.get('/searches', searchRoute);
@@ -137,6 +140,6 @@ function Book(info) {
 client.connect()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`listening to Queen ${PORT}`);
-    }).catch(error => console.error(error));
-  })
+      console.log(`listening to Queen on ${PORT}`);
+    })
+  }).catch(error => console.error(error));
