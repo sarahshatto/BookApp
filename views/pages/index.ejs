@@ -15,16 +15,11 @@
     <p><a href="<%= link %>">searches</a></p>
 
   <% bookshelfResults.forEach( book => { %>
-    <form action="/books" method="GET">
       <div>
         <img src="<%= book.image_url %>" alt="<%= book.title %>">
         <h2><%= book.title %></h2>
         <h3><%= book.author %></h3>
       </div>
-      <input type="hidden" name="id" value=<%=book.id%> />
-      <input type="hidden" name="title" value=<%=book.title%> />
-      <input type="hidden" name="authors" value=<%=book.authors%> />
-      <input type="hidden" name="description" value=<%=book.description%> />
       <a href="books/<%= book.id %>">Details</a>
     </form>
   <% }) %>

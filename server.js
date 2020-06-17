@@ -74,7 +74,7 @@ app.post('/searches', (request, response) => {
       const finalBookArray = bookArray.map(book => {
         return new Book(book.volumeInfo);
       });
-      console.log(finalBookArray[0]);
+      // console.log(finalBookArray[0]);
       response.render('./pages/searches/show.ejs', {searchResults: finalBookArray});
     }).catch();
 })
@@ -89,9 +89,30 @@ app.get('/books/:id', (request, response) => {
     .then(sqlResults => {
       response.status(200).render('./pages/books/show.ejs', {book:sqlResults.rows[0]});
     })
-
-
 })
+
+app.post('/books', (request, response) => {
+  console.log(request.body);
+
+  let {author, title, isbn, image_url, description} = request.body;
+
+  let sql = 'INSERT INTO books (author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5) RETURNING ID;';
+
+  let safeValues = [
+    author,
+    title,
+    isbn,
+    image_url,
+    description
+  ]
+
+  client.query(sql, safeValues)
+    .then(results => {
+      console.log(results.rows);
+      let id=results.rows[0].id;
+      response.redirect(`/books/${id}`);
+    });
+});
 
 // Catch all for any errors
 app.all('*', (request, response) => {
