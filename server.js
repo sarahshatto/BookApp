@@ -80,8 +80,19 @@ app.post('/searches', (request, response) => {
 })
 
 app.get('/books/:id', (request, response) => {
+  console.log(request.params);
   let id = request.params.id;
   console.log(id);
+
+  let sql = 'SELECT * FROM books WHERE id = $1;';
+  let safeValues = [id];
+
+  client.query(sql, safeValues)
+    .then(sqlResults => {
+      console.log(sqlResults.rows);
+    })
+
+
 })
 
 // Catch all for any errors
