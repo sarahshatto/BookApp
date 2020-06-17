@@ -30,7 +30,14 @@ app.set('view engine', 'ejs');
 
 
 // Testing the home route, Proof of life
-app.get('/', (request, response) => {
+
+app.get('/', homeRoute);
+app.get('/searches', searchRoute);
+app.post('/searches', postSearch);
+app.get('/books/:id', getDetail);
+app.post('/books', addToFavorites);
+
+function homeRoute(request, response){
   console.log('Is this the real life?');
   let sql = 'SELECT * FROM books;';
   client.query(sql)
@@ -42,20 +49,15 @@ app.get('/', (request, response) => {
       })
       console.log(displayBooks);
       response.status(200).render('./pages/index.ejs', { link: './searches', bookshelfResults: displayBooks });
-    })
-});
+    }).catch(error => console.error(error));
+}
 
-// app.get('/hello', (request, response) => {
-//   console.log('I am on Hello!');
-//   response.status(200).render('./pages/index.ejs');
-// })
-
-app.get('/searches', (request, response) => {
+function searchRoute(request, response){
   console.log('This is the search route');
   response.status(200).render('./pages/searches/new.ejs');
-})
+}
 
-app.post('/searches', (request, response) => {
+function postSearch(request, response){
   let searchQuery = request.body.search[0];
   let titleOrAuthor = request.body.search[1];
 
@@ -69,17 +71,15 @@ app.post('/searches', (request, response) => {
 
   superagent.get(url)
     .then(results => {
-      // console.log(results.body.items);
       let bookArray = results.body.items;
       const finalBookArray = bookArray.map(book => {
         return new Book(book.volumeInfo);
       });
-      // console.log(finalBookArray[0]);
       response.render('./pages/searches/show.ejs', {searchResults: finalBookArray});
-    }).catch();
-})
+    }).catch(error => console.error(error));
+}
 
-app.get('/books/:id', (request, response) => {
+function getDetail(request, response){
   let id = request.params.id;
 
   let sql = 'SELECT * FROM books WHERE id = $1;';
@@ -88,12 +88,10 @@ app.get('/books/:id', (request, response) => {
   client.query(sql, safeValues)
     .then(sqlResults => {
       response.status(200).render('./pages/books/show.ejs', {book:sqlResults.rows[0]});
-    })
-})
+    }).catch(error => console.error(error));
+}
 
-app.post('/books', (request, response) => {
-  console.log(request.body);
-
+function addToFavorites(request, response){
   let {author, title, isbn, image_url, description} = request.body;
 
   let sql = 'INSERT INTO books (author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5) RETURNING ID;';
@@ -111,8 +109,8 @@ app.post('/books', (request, response) => {
       console.log(results.rows);
       let id=results.rows[0].id;
       response.redirect(`/books/${id}`);
-    });
-});
+    }).catch(error => console.error(error));
+}
 
 // Catch all for any errors
 app.all('*', (request, response) => {
@@ -130,11 +128,10 @@ function Book(info) {
   this.isbn ='industryIdentifiers' in info ? info.industryIdentifiers[0].identifier : 'No ISBN available'
 }
 
-
 // Turning on the server
 client.connect()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`listening to Queen ${PORT}`);
-    })
+    }).catch(error => console.error(error));
   })
