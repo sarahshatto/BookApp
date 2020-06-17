@@ -28,8 +28,9 @@ app.use(express.static('public'));
 // set up the view engine for templating
 app.set('view engine', 'ejs');
 
-// const methodOverride = require('method-override');
-// app.use(methodOverride('_method'));
+// import method override so we can change HTML behaviour.
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 // all the routes
 app.get('/', homeRoute);
@@ -37,6 +38,8 @@ app.get('/searches', searchRoute);
 app.post('/searches', postSearch);
 app.get('/books/:id', getDetail);
 app.post('/books', addToFavorites);
+app.get('/edit/:id', gotoUpdatePage);
+app.put('/edit/:id', updateBookInfo);
 
 // Home route which is the user's favorites file.
 function homeRoute(request, response){
@@ -113,10 +116,47 @@ function addToFavorites(request, response){
 
   client.query(sql, safeValues)
     .then(results => {
-      console.log(results.rows);
+      // console.log(results.rows);
       let id=results.rows[0].id;
       response.redirect(`/books/${id}`);
     }).catch(error => console.error(error));
+}
+
+function gotoUpdatePage(request, response){
+  let id = request.params.id;
+
+  let sql = 'SELECT * FROM books WHERE id = $1;';
+  let safeValues = [id];
+
+  client.query(sql, safeValues)
+    .then(sqlResults => {
+      response.status(200).render('./pages/books/edit.ejs', {book:sqlResults.rows[0]});
+    }).catch(error => console.error(error));
+}
+
+function updateBookInfo(request, response){
+  console.log('is the id here?', request.params);
+  let bookId = request.params.id;
+
+  let {author, title, isbn, image_url, description} = request.body;
+
+  console.log(request.body);
+
+  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, image_url=$4, description=$5 WHERE id=$6;';
+  let safeValues = [
+    author,
+    title,
+    isbn,
+    image_url,
+    description,
+    bookId
+  ];
+
+  client.query(sql, safeValues)
+    .then(sqlResults => {
+      response.redirect(`../books/${bookId}`);
+    })
+
 }
 
 // Catch all for any errors
