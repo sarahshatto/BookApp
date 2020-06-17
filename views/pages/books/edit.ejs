@@ -34,9 +34,20 @@
 
           <div>
             <span>Description</span>
-            <textarea rows="4" cols="50" name="description" form="edit">
-              "<%= book.description %>"
-            </textarea>
+            <input type="text" name="description" maxlength="254" size="50" value="<%= book.description%>">
+          </div>
+
+          <div>
+            <label>Select A Bookshelf
+              <select name="bookshelf">
+                <option value="classic">Classic</option>
+                <option value="crime">Crime</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="scifi">Sci-Fi</option>
+                <option value="nonfiction">Non-Fiction</option>
+                <option value="adventure">Adventure</option>
+              </select>
+            </label>
           </div>
         <button>Update</button>
       </fieldset>

@@ -125,7 +125,7 @@ function addToFavorites(request, response){
 function gotoUpdatePage(request, response){
   let id = request.params.id;
 
-  let sql = 'SELECT * FROM books WHERE id = $1;';
+  let sql = 'SELECT DISTINCT * FROM books WHERE id = $1;';
   let safeValues = [id];
 
   client.query(sql, safeValues)
@@ -138,17 +138,18 @@ function updateBookInfo(request, response){
   console.log('is the id here?', request.params);
   let bookId = request.params.id;
 
-  let {author, title, isbn, image_url, description} = request.body;
+  let {author, title, isbn, image_url, description, bookshelf} = request.body;
 
   console.log(request.body);
 
-  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, image_url=$4, description=$5 WHERE id=$6;';
+  let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, image_url=$4, description=$5, bookshelf=$6 WHERE id=$7;';
   let safeValues = [
     author,
     title,
     isbn,
     image_url,
     description,
+    bookshelf,
     bookId
   ];
 

@@ -3,4 +3,6 @@
 <h3><%= book.author %></h3>
 <p><%= book.description %></p>
 <h3><%= book.isbn %></h3>
-<h3><%= book.bookshelf %></h3>  
+<h3><%= book.bookshelf %></h3> 
+<a href="/edit/<%= book.id%>">Update Book</a>
+<a href="/delete/<%= book.id%>">Delete Book From Collection</a> 
