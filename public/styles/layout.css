@@ -1,5 +1,17 @@
+/* LAYOUT: 
+// Major components of a page
+//  // header 
+//  //  nav
+//  //  content
+//  // footer
+//  // ID selectors
+//  //  a Layout style only has a single selector: a single ID or class name. However, there are times when a Layout needs to respond to different factors
+
+ */
+
+/*  
 form{
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-}
+} */
 
