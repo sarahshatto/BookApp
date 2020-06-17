@@ -79,6 +79,11 @@ app.post('/searches', (request, response) => {
     }).catch();
 })
 
+app.get('/books/:id', (request, response) => {
+  let id = request.params.id;
+  console.log(id);
+})
+
 // Catch all for any errors
 app.all('*', (request, response) => {
   console.error('No escape from reality!');
