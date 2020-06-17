@@ -8,7 +8,7 @@ const app = express();
 // Import and configure the chamber of secrets
 require('dotenv').config();
 
-// Import and configure the pg library ( Postgress )
+// Import and configure the pg library ( Postgres )
 const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => console.error(err));
@@ -40,6 +40,7 @@ app.get('/books/:id', getDetail);
 app.post('/books', addToFavorites);
 app.get('/edit/:id', gotoUpdatePage);
 app.put('/edit/:id', updateBookInfo);
+app.delete('/books/:id', deleteBook);
 
 // Home route which is the user's favorites file.
 function homeRoute(request, response){
@@ -47,12 +48,12 @@ function homeRoute(request, response){
   let sql = 'SELECT * FROM books;';
   client.query(sql)
     .then(sqlResults => {
-      console.log(sqlResults.rows);
+      // console.log(sqlResults.rows);
       let displayBooks = [];
       sqlResults.rows.forEach(value => {
         displayBooks.push(value);
       })
-      console.log(displayBooks);
+      // console.log(displayBooks);
       response.status(200).render('./pages/index.ejs', { link: './searches', bookshelfResults: displayBooks });
     }).catch(error => console.error(error));
 }
@@ -116,7 +117,6 @@ function addToFavorites(request, response){
 
   client.query(sql, safeValues)
     .then(results => {
-      // console.log(results.rows);
       let id=results.rows[0].id;
       response.redirect(`/books/${id}`);
     }).catch(error => console.error(error));
@@ -135,12 +135,9 @@ function gotoUpdatePage(request, response){
 }
 
 function updateBookInfo(request, response){
-  console.log('is the id here?', request.params);
   let bookId = request.params.id;
 
   let {author, title, isbn, image_url, description, bookshelf} = request.body;
-
-  console.log(request.body);
 
   let sql = 'UPDATE books SET author=$1, title=$2, isbn=$3, image_url=$4, description=$5, bookshelf=$6 WHERE id=$7;';
   let safeValues = [
@@ -156,6 +153,20 @@ function updateBookInfo(request, response){
   client.query(sql, safeValues)
     .then(sqlResults => {
       response.redirect(`../books/${bookId}`);
+    })
+}
+
+function deleteBook(request, response){
+  console.log('is the id here?', request.params.id);
+
+  let bookId = request.params.id;
+
+  let sql = 'DELETE FROM books WHERE id=$1;';
+  let safeValues = [bookId];
+
+  client.query(sql, safeValues)
+    .then(sqlResults => {
+      response.status(200).redirect('/');
     })
 
 }
