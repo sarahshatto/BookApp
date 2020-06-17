@@ -138,5 +138,5 @@ client.connect()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`listening to Queen ${PORT}`);
-    }).catch(error => console.error(error));
+    })
   })
