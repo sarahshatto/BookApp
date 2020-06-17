@@ -8,7 +8,6 @@
   </header>
   <main>
     <p><a href="<%= link %>">searches</a></p>
-
   <% bookshelfResults.forEach( book => { %>
       <div>
         <img src="<%= book.image_url %>" alt="<%= book.title %>">
@@ -16,7 +15,7 @@
         <h3><%= book.author %></h3>
       </div>
       <a href="books/<%= book.id %>">Details</a>
-    </form>
+
   <% }) %>
  </main> 
  <footer>
