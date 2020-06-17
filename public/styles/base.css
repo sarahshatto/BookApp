@@ -1,13 +1,81 @@
+/* BASE: 
+  // Base rule is applied to an element using an element selector, a descendent selector, or a child selector, along with any pseudo-classes. 
+  // It doesn’t include any class or ID selectors. It is defining the default styling for how that element should look in all occurrences on the page.
+  //  // heading sizes 
+  //  // default link styles
+  //  // default font styles
+  //  // body backgrounds
+
+ */
+
+
 *{
-  background-color: #202C39;
+  background-color: #283845;
+  box-sizing: border-box;
   color: white;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* body{
-  
+body{
+  background-color: #F2D492;
+  display: grid;
+  grid-template-columns: 81px 81px 81px 81px 81px 81px;
+  grid-template-rows: 5% 5% 85% 5%;
+  height: 889px;
+  margin: auto;
+  width: 486px;
+}
+
+footer{
+    background-color: #202C39;
+    grid-row-start:4;
+    grid-column: 1 / span 6;
+}
+
+header{
+  background-color: #202C39;
+  grid-row-start:1;
+  grid-column: 1 / span 6;
+}
+
+#headerp{
+  background-color: #202C39;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+/* main{
 } */
 
-label {
+#searchOptions{
+  grid-row-start:3;
+  grid-column: 2 / span 4;
+  background-color: #F2D492
+}
+
+/* will unify after resolving font sizes */
+#searchTitle{
+  background-color: #B8B08D;
+  grid-row-start: 2;
+  grid-column: 1 / span 6;
+  text-align: center;
+}
+
+#searchTitle--p{
+  background-color: #B8B08D;
+  text-align: center;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+h4{
+  background-color: #B8B08D;
+  grid-row-start:2;
+  grid-column: 1 / span 6;
+}
+/* ^^^ */
+
+/* label {
   display:block;
   margin: 2em;
 }
@@ -16,6 +84,8 @@ label span {
   display:block;
 }
 
-fieldset {
-  width: fit-content;
-}
+
+/* is this real */
+/* fieldset {
+  width: 50%;
+} */
