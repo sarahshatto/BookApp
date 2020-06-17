@@ -38,6 +38,7 @@ app.get('/searches', searchRoute);
 app.post('/searches', postSearch);
 app.get('/books/:id', getDetail);
 app.post('/books', addToFavorites);
+app.get('/edit/:id', updatePage);
 
 // Home route which is the user's favorites file.
 function homeRoute(request, response){
@@ -117,6 +118,18 @@ function addToFavorites(request, response){
       // console.log(results.rows);
       let id=results.rows[0].id;
       response.redirect(`/books/${id}`);
+    }).catch(error => console.error(error));
+}
+
+function updatePage(request, response){
+  let id = request.params.id;
+
+  let sql = 'SELECT * FROM books WHERE id = $1;';
+  let safeValues = [id];
+
+  client.query(sql, safeValues)
+    .then(sqlResults => {
+      response.status(200).render('./pages/books/edit.ejs', {book:sqlResults.rows[0]});
     }).catch(error => console.error(error));
 }
 

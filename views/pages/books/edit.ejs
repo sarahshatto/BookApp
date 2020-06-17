@@ -1,33 +1,51 @@
-<form action="/edit/<%=id%>" method="post">
-  <input type="hidden" name="_method" value="put">
-  <fieldset>
-    <legend>Edit Book</legend>
-      <div>
-        <span>Title</span>
-        <input type="text" name="editTitle" value="<%= title %>">
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../layouts/head.ejs') %>
+</head>
+<body>
+  <header>
 
-      <div>
-        <span>Authors</span>
-        <input type="text" name="editAuthor" value="<%= author %>">
-      </div>
+  </header>
+  <main>
+    <%- include('./details.ejs')%>
+    <form action="/edit/<%= book.id%>" method="post">
+      <input type="hidden" name="_method" value="put">
+      <fieldset>
+        <legend>Edit Book</legend>
+          <div>
+            <span>Title</span>
+            <input type="text" name="editTitle" value="<%= book.title %>">
+          </div>
 
-      <div>
-        <span>ISBN</span>
-        <input type="text" name="editIsbn" value="<%= isbn %>">
-      </div>
+          <div>
+            <span>Authors</span>
+            <input type="text" name="editAuthor" value="<%= book.author %>">
+          </div>
 
-      <div>
-        <span>Image</span>
-        <input type="text" name="editImage" value="<%= image_url %>">
-      </div>
+          <div>
+            <span>ISBN</span>
+            <input type="text" name="editIsbn" value="<%= book.isbn %>">
+          </div>
 
-      <div>
-        <span>Description</span>
-        <textarea rows="4" cols="50" name="editDescription" form="edit">
-          "<%= description %>"
-        </textarea>
-      </div>
-    <button>Update</button>
-  </fieldset>
-</form>
+          <div>
+            <span>Image</span>
+            <input type="text" name="editImage" value="<%= book.image_url %>">
+          </div>
+
+          <div>
+            <span>Description</span>
+            <textarea rows="4" cols="50" name="editDescription" form="edit">
+              "<%= book.description %>"
+            </textarea>
+          </div>
+        <button>Update</button>
+      </fieldset>
+    </form>
+  <a href="/">Home</a>
+</main> 
+<footer>
+  
+</footer>
+</body>
+</html>
