@@ -9,33 +9,32 @@
   </header>
   <main>
     <%- include('./details.ejs')%>
-    <form action="/edit/<%= book.id%>" method="post">
-      <input type="hidden" name="_method" value="put">
+    <form action="/edit/<%= book.id%>?_method=PUT" method="post">
       <fieldset>
         <legend>Edit Book</legend>
           <div>
             <span>Title</span>
-            <input type="text" name="editTitle" value="<%= book.title %>">
+            <input type="text" name="title" value="<%= book.title %>">
           </div>
 
           <div>
             <span>Authors</span>
-            <input type="text" name="editAuthor" value="<%= book.author %>">
+            <input type="text" name="author" value="<%= book.author %>">
           </div>
 
           <div>
             <span>ISBN</span>
-            <input type="text" name="editIsbn" value="<%= book.isbn %>">
+            <input type="text" name="isbn" value="<%= book.isbn %>">
           </div>
 
           <div>
             <span>Image</span>
-            <input type="text" name="editImage" value="<%= book.image_url %>">
+            <input type="text" name="image_url" value="<%= book.image_url %>">
           </div>
 
           <div>
             <span>Description</span>
-            <textarea rows="4" cols="50" name="editDescription" form="edit">
+            <textarea rows="4" cols="50" name="description" form="edit">
               "<%= book.description %>"
             </textarea>
           </div>
