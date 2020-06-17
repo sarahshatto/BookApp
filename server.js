@@ -28,8 +28,9 @@ app.use(express.static('public'));
 // set up the view engine for templating
 app.set('view engine', 'ejs');
 
-// const methodOverride = require('method-override');
-// app.use(methodOverride('_method'));
+// import method override so we can change HTML behaviour.
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 // all the routes
 app.get('/', homeRoute);
@@ -113,7 +114,7 @@ function addToFavorites(request, response){
 
   client.query(sql, safeValues)
     .then(results => {
-      console.log(results.rows);
+      // console.log(results.rows);
       let id=results.rows[0].id;
       response.redirect(`/books/${id}`);
     }).catch(error => console.error(error));

@@ -1,7 +1,33 @@
 <form action="/edit/<%=id%>" method="post">
   <input type="hidden" name="_method" value="put">
-
   <fieldset>
     <legend>Edit Book</legend>
+      <div>
+        <span>Title</span>
+        <input type="text" name="editTitle" value="<%= title %>">
+      </div>
+
+      <div>
+        <span>Authors</span>
+        <input type="text" name="editAuthor" value="<%= author %>">
+      </div>
+
+      <div>
+        <span>ISBN</span>
+        <input type="text" name="editIsbn" value="<%= isbn %>">
+      </div>
+
+      <div>
+        <span>Image</span>
+        <input type="text" name="editImage" value="<%= image_url %>">
+      </div>
+
+      <div>
+        <span>Description</span>
+        <textarea rows="4" cols="50" name="editDescription" form="edit">
+          "<%= description %>"
+        </textarea>
+      </div>
+    <button>Update</button>
   </fieldset>
 </form>
