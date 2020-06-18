@@ -17,27 +17,32 @@
 }
 
 body{
-  background-color: #F2D492;
+  background-color: #ede3ce;
   display: grid;
-  grid-template-columns: 81px 81px 81px 81px 81px 81px;
-  grid-template-rows: 5% 5% 85% 5%;
-  height: 889px;
+  grid-template-columns: 41px 40px 81px 81px 81px 81px 40px 41px;
+  grid-template-rows: 75px 50px 50px 70px 30px 70px 30px 70px 30px 70px 30px 70px 30px 45px 30px 30px 30px 100px 30px 70px 75px;
+  height: 1500px;
   margin: auto;
   width: 486px;
 }
 
 footer{
     background-color: #202C39;
-    grid-row-start:4;
-    grid-column: 1 / span 6;
+    grid-row-start:21;
+    grid-column: 1 / span 8;
 }
 
 header{
   background-color: #202C39;
   grid-row-start:1;
-  grid-column: 1 / span 6;
+  grid-column: 1 / span 8;
 }
 
+#subhead{
+  background-color: #f2d492;
+  grid-row-start:2;
+  grid-column: 1 / span 8;
+}
 #headerp{
   background-color: #202C39;
   text-align: left;
@@ -50,19 +55,19 @@ header{
 #searchOptions{
   grid-row-start:3;
   grid-column: 2 / span 4;
-  background-color: #F2D492
+  background-color: #ede3ce;
 }
 
 /* will unify after resolving font sizes */
 #searchTitle{
-  background-color: #B8B08D;
+  background-color: #F2D492;
   grid-row-start: 2;
   grid-column: 1 / span 6;
   text-align: center;
 }
 
 #searchTitle--p{
-  background-color: #B8B08D;
+  background-color: #F2D492;
   text-align: center;
   padding-left: 10px;
   padding-top: 10px;
@@ -89,3 +94,21 @@ label span {
 /* fieldset {
   width: 50%;
 } */
+
+#titleOrAuthorEntry{
+  background-color: blueviolet;
+  /* grid-row-start:3; */
+  grid-column: 1 / span 4;
+}
+
+#outerContainer{
+  background-color: #ede3ce;
+  border: 1px solid black;
+  grid-column: 3 / span 4;
+  grid-row: 4 / span 16;
+  z-index: 1;
+}
+
+.img--searched{
+  grid-column: 4 / span 6;
+}
