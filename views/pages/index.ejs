@@ -15,9 +15,12 @@
         <!-- <h2><%= book.title %></h2>
         <h3><%= book.author %></h3> -->
       </div>
-      <!-- <a href="books/<%= book.id %>">Details</a> -->
-      <% }) %> 
-    </div>
+
+      <form action="books/<%= book.id %>">
+        <button>Details</button>
+      </form>
+  <% }) %>
+ </main> 
  <footer>
  </footer>
 </body>

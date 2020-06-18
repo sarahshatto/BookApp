@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../layouts/head.ejs') %>
+</head>
+<body>
+  <header>
+
+  </header>
+  <main>
+    <%- include('./details.ejs')%>
+    <form action="/edit/<%= book.id%>?_method=PUT" method="post">
+      <fieldset>
+        <legend>Edit Book</legend>
+          <div>
+            <span>Title</span>
+            <input type="text" name="title" value="<%= book.title %>">
+          </div>
+
+          <div>
+            <span>Authors</span>
+            <input type="text" name="author" value="<%= book.author %>">
+          </div>
+
+          <div>
+            <span>ISBN</span>
+            <input type="text" name="isbn" value="<%= book.isbn %>">
+          </div>
+
+          <div>
+            <span>Image</span>
+            <input type="text" name="image_url" value="<%= book.image_url %>">
+          </div>
+
+          <div>
+            <span>Description</span>
+            <input type="text" name="description" maxlength="254" size="50" value="<%= book.description%>">
+          </div>
+
+          <div>
+            <label>Select A Bookshelf
+              <select name="bookshelf">
+                <option value="classic">Classic</option>
+                <option value="crime">Crime</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="scifi">Sci-Fi</option>
+                <option value="nonfiction">Non-Fiction</option>
+                <option value="adventure">Adventure</option>
+              </select>
+            </label>
+          </div>
+        <button>Update</button>
+      </fieldset>
+    </form>
+  <a href="/">Home</a>
+</main> 
+<footer>
+  
+</footer>
+</body>
+</html>
