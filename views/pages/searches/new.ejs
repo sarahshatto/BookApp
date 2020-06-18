@@ -5,12 +5,10 @@
   </head>
   <body>
     <header>
-<p id="headerp">Best Books!</p>
+      Best Books!
     </header>
-
-      <div id="searchTitle">
-      <p id="searchTitle--p">Search by Title or Author</p>
-      </div>
+       <div id="subhead"> Search Results:</div>
+       <div id="outerContainer">
       <form id="searchOptions" action="/searches" method="post">
         <input type="text" name="search" placeholder="Enter a title or author" required>
         <fieldset>
@@ -25,8 +23,9 @@
             <input type="radio" name="search" value="author" required>
           </label>
         </fieldset>
-        <button type="submit">Search the Google Books API</button>
+        <button id="button--details" type="submit">Search the Google Books API</button>
       </form>
+    </div>
     <footer>
       
     </footer>

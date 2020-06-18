@@ -5,23 +5,23 @@
 </head>
 <body>
   <header>
+    Best Books!
   </header>
-  <div id="subhead"></div>
+  <div id="subhead"> Search Results:</div>
   <div id="outerContainer">
     <p><a href="<%= link %>">searches</a></p>
   <% bookshelfResults.forEach( book => { %>
-      <div>
+      <div class="img--searchResults">
         <img class="img--searched" src="<%= book.image_url %>" alt="<%= book.title %>">
-       <h2><%= book.title %></h2>
-        <h3><%= book.author %></h3>
+       <p><%= book.title %></p>
+        <p><%= book.author %></p>
+        <form action="books/<%= book.id %>">
+          <button id="button--details">Details</button>
+        </form>
       </div>
 
-      <form action="books/<%= book.id %>">
-        <button>Details</button>
-      </form>
   <% }) %>
   </div>
- </main> 
  <footer>
  </footer>
 </body>

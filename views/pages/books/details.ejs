@@ -1,12 +1,17 @@
+
+<body>
+  <div class="img--searchResults"> 
 <img src="<%= book.image_url %>" alt="<%= book.title %>">
-<h2><%= book.title %></h2>
-<h3><%= book.author %></h3>
-<p><%= book.description %></p>
-<h3><%= book.isbn %></h3>
-<h3><%= book.bookshelf %></h3> 
+<p><%= book.title %></p>
+<p><%= book.author %></p>
+<div class="extraDescription"><p class=extraDescription><%= book.description %></p></div>
+<p class="extraInfo"><%= book.isbn %></p>
+<p class="extraInfo"><%= book.bookshelf %></p> 
 <form action="/edit/<%= book.id%>">
-  <button>Update Book</button>
+  <button id="button--details">Update Book</button>
 </form>
 <form action="/books/<%= book.id%>?_method=DELETE" method="post">
-  <button>Delete Book From Collection</button> 
+  <button id="button--details">Delete Book From Collection</button> 
 </form>
+</div>
+</body>
